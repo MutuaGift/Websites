@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stitched with Love - Premium handmade crochet blankets, wearables, and amigurumi toys crafted in Kenya.">
+    <title>Stitched with Love | Handmade Crochet Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            --primary-color: #2d5016;
+            --secondary-color: #4ade80;
+            --accent-color: #22c55e;
+            --bg-color: #f0fdf4;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --light-text: #475569;
+            --shadow: 0 10px 30px rgba(45, 80, 22, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Lato', sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height:1.7; }
+        h1,h2,h3,h4 { font-family:'Playfair Display', serif; color: var(--primary-color); }
+        img { max-width:100%; display:block; object-fit:cover; }
+
+        /* --- Navigation --- */
+        nav { position:fixed; top:0; width:100%; background-color: rgba(255,255,255,0.98); box-shadow:0 2px 15px rgba(0,0,0,0.05); z-index:1000; padding:1.2rem 0; transition:var(--transition); }
+        nav ul { list-style:none; display:flex; justify-content:center; flex-wrap:wrap; gap:2.5rem; }
+        nav a { text-decoration:none; color:var(--text-color); font-weight:400; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; position:relative; transition:var(--transition); }
+        nav a::after { content:''; position:absolute; width:0; height:2px; bottom:-5px; left:0; background-color: var(--secondary-color); transition:var(--transition); }
+        nav a:hover { color:var(--accent-color); }
+        nav a:hover::after { width:100%; }
+
+        /* --- Hero --- */
+        .hero { margin-top:60px; height:90vh; background:linear-gradient(135deg, #059669 0%, #10b981 50%, #4ade80 100%); display:flex; align-items:center; justify-content:center; text-align:center; padding:2rem; color:white; position:relative; overflow:hidden; }
+        .hero::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.15) 0%, transparent 50%); }
+        .hero-content { max-width:800px; animation: fadeInUp 1s ease-out; position:relative; z-index:1; }
+        .hero h1 { font-size:4rem; margin-bottom:0.5rem; text-shadow:0 2px 10px rgba(0,0,0,0.3); }
+        .hero .tagline { font-size:1.5rem; font-style:italic; margin-bottom:2rem; color: rgba(255,255,255,0.95); }
+        .hero p:last-of-type { font-size:1.1rem; margin-bottom:2rem; max-width:600px; margin-left:auto; margin-right:auto; }
+        .cta-button { display:inline-block; padding:1rem 2.5rem; background-color:white; color:var(--primary-color); text-decoration:none; border-radius:50px; font-weight:bold; letter-spacing:1px; transition:var(--transition); }
+        .cta-button:hover { background-color: var(--primary-color); color:white; transform:translateY(-3px); box-shadow:0 5px 15px rgba(0,0,0,0.3); }
+
+        /* --- Sections --- */
+        section { padding:6rem 2rem; max-width:1200px; margin:0 auto; }
+        h2 { font-size:2.8rem; margin-bottom:3rem; text-align:center; position:relative; padding-bottom:1rem; }
+        h2::after { content:'🧶'; display:block; font-size:1.5rem; margin-top:10px; opacity:0.6; }
+
+        /* --- About --- */
+        .about-content { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+        .about-image img { border-radius:20px 0 20px 0; box-shadow:var(--shadow); width:100%; height:500px; }
+        .about-text p { margin-bottom:1.5rem; font-size:1.1rem; color:var(--light-text); }
+
+        /* --- Gallery --- */
+        #gallery { background-color:white; }
+        .gallery-filters { display:flex; justify-content:center; gap:1rem; margin-bottom:3rem; flex-wrap:wrap; }
+        .filter-btn { padding:0.6rem 1.5rem; background:transparent; border:2px solid var(--secondary-color); color:var(--primary-color); cursor:pointer; border-radius:25px; transition:var(--transition); font-family:'Lato', sans-serif; font-size:0.9rem; font-weight:600; }
+        .filter-btn:hover, .filter-btn.active { background-color:var(--accent-color); border-color:var(--accent-color); color:white; }
+        .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:2rem; }
+        .gallery-item { position:relative; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); height:350px; cursor:pointer; opacity:1; transform:scale(1); transition:opacity 0.4s ease, transform 0.4s ease; }
+        .gallery-item.fade-in { animation: fadeIn 0.5s ease-in-out; }
+        .gallery-item img { width:100%; height:100%; transition:transform 0.5s ease; }
+        .gallery-item:hover img { transform:scale(1.1); }
+        .gallery-item-overlay { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(45, 80, 22, 0.9), transparent); padding:2rem 1.5rem; transform:translateY(100%); opacity:0; transition:transform 0.4s ease, opacity 0.4s ease; color:white; text-align:left; }
+        .gallery-item:hover .gallery-item-overlay { transform:translateY(0); opacity:1; }
+
+        /* --- Shop --- */
+        .shop-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:2.5rem; }
+        .product-card { background:var(--card-bg); border-radius:15px; overflow:hidden; box-shadow:var(--shadow); transition:var(--transition); border:2px solid #dcfce7; display:flex; flex-direction:column; }
+        .product-card:hover { transform:translateY(-10px); border-color:var(--secondary-color); }
+        .product-image { height:280px; overflow:hidden; }
+        .product-image img { width:100%; height:100%; transition:transform 0.5s; }
+        .product-card:hover .product-image img { transform:scale(1.05); }
+        .product-info { padding:1.8rem; text-align:center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-info h3 { font-size:1.4rem; margin-bottom:0.5rem; }
+        .product-price { font-size:1.3rem; color:var(--accent-color); font-weight:700; margin:0.5rem 0 1.5rem; font-family:'Playfair Display', serif; }
+        .btn-shop { display:block; width:100%; padding:0.8rem; background-color:var(--secondary-color); color:white; border:none; border-radius:8px; cursor:pointer; transition:var(--transition); font-size:1rem; font-weight:600; }
+        .btn-shop:hover { background-color:var(--primary-color); transform:translateY(-2px); box-shadow:0 4px 12px rgba(34, 197, 94, 0.3); }
+
+        /* --- Blog --- */
+        #blog { background-color:white; }
+        .blog-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:2.5rem; }
+        .blog-card { background:var(--bg-color); border-radius:15px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.05); transition:var(--transition); border:2px solid #dcfce7; }
+        .blog-card:hover { box-shadow:var(--shadow); border-color:var(--secondary-color); }
+        .blog-image { height:220px; }
+        .blog-image img { height:100%; width:100%; }
+        .blog-content { padding:2rem; }
+        .blog-date { font-size:0.85rem; color:var(--accent-color); font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:0.5rem; }
+        .blog-content h3 { font-size:1.5rem; margin-bottom:1rem; line-height:1.3; }
+        .read-more { color:var(--primary-color); text-decoration:none; font-weight:bold; border-bottom:2px solid var(--primary-color); padding-bottom:2px; transition:var(--transition); }
+        .read-more:hover { color:var(--accent-color); border-color:var(--accent-color); }
+
+        /* --- Contact --- */
+        .contact-container { max-width:700px; margin:0 auto; position:relative; }
+        .contact-form { background:white; padding:3rem; border-radius:20px; box-shadow:var(--shadow); border:2px solid #dcfce7; }
+        .form-group { margin-bottom:1.8rem; }
+        .form-group label { display:block; margin-bottom:0.8rem; color:var(--primary-color); font-weight:700; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; }
+        .form-group input, .form-group textarea { width:100%; padding:1rem; border:2px solid #dcfce7; border-radius:8px; font-family:'Lato',sans-serif; font-size:1rem; transition:var(--transition); background-color:#f0fdf4; }
+        .form-group input:focus, .form-group textarea:focus { outline:none; border-color:var(--secondary-color); background-color:white; box-shadow:0 0 0 3px rgba(74, 222, 128, 0.1); }
+        .form-group textarea { min-height:150px; resize:vertical; }
+        .social-links { display:flex; justify-content:center; gap:2rem; margin-top:3rem; }
+        .social-links a { color:var(--primary-color); font-size:2.5rem; transition:var(--transition); text-decoration:none; display:flex; align-items:center; gap:0.5rem; }
+        .social-links a:hover { color:var(--accent-color); transform:translateY(-3px); }
+        .social-text { font-size:1rem; font-family:'Lato', sans-serif; font-weight:600; }
+
+        /* --- Footer --- */
+        footer { background-color:var(--primary-color); color:white; text-align:center; padding:3rem 2rem; margin-top:4rem; }
+        footer p { opacity:0.9; font-size:0.95rem; }
+
+        /* --- Animations --- */
+        @keyframes fadeIn { from { opacity:0; transform:scale(0.9); } to { opacity:1; transform:scale(1); } }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+        /* --- Responsive --- */
+        @media (max-width:768px) {
+            .hero h1 { font-size:3rem; }
+            .about-content { grid-template-columns:1fr; }
+            .about-image img { height:350px; }
+            section { padding:4rem 1.5rem; }
+            nav { padding: 1rem 0; }
+            nav ul { gap:1rem; padding: 0 1rem; }
+            nav a { font-size: 0.8rem; }
+            .contact-form { padding:1.5rem; }
+            .social-links a { font-size:2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Handmade Crochet Art</h1>
+            <p class="tagline">Handmade with love, stitch by stitch</p>
+            <p>Welcome to my world of yarn and creativity. Each piece is thoughtfully crafted to bring warmth, texture, and bespoke beauty into your life.</p>
+            <a href="#shop" class="cta-button">Browse Collection</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About the Artist</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1619234733461-1915461f8a71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Crochet Artist Hands" loading="lazy">
+            </div>
+            <div class="about-text">
+                <h3>A Journey of Yarn & Needle</h3>
+                <p>Hello! I'm a passionate crochet artist who fell in love with yarn and needles over a decade ago. What started as a hobby has blossomed into a lifelong journey of creating beautiful, handmade pieces that bring joy and comfort to others.</p>
+                <p>Every stitch I make carries intention and care. I believe in the magic of handmade items – they hold stories, warmth, and a piece of the maker's heart.</p>
+                <p>My inspiration comes from nature, colors, textures, and the wonderful people I create for. I'm constantly exploring new patterns and techniques to bring fresh, unique pieces to life.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-filter="all">All Creations</button>
+            <button class="filter-btn" data-filter="blankets">Blankets</button>
+            <button class="filter-btn" data-filter="wearables">Wearables</button>
+            <button class="filter-btn" data-filter="toys">Amigurumi</button>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-category="blankets">
+                <img src="https://images.unsplash.com/photo-1579969564619-35c91b585354?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Knitted Blanket" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <h3>Sunset Blanket</h3>
+                    <p>Soft merino wool • 60" × 80"</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="wearables">
+                <img src="https://images.unsplash.com/photo-1631528622765-1d488bc8a93d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Winter Scarf" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <h3>Winter Warmth Scarf</h3>
+                    <p>Alpaca blend • 8" × 72"</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="toys">
+                <img src="https://images.unsplash.com/photo-1559437190-09852264585f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Crochet Bear" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <h3>Cuddle Buddy Bear</h3>
+                    <p>Cotton yarn • 12" tall</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="wearables">
+                <img src="https://images.unsplash.com/photo-1542062700-9b61ccbc1696?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beanie" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <h3>Bloom Headband</h3>
+                    <p>Bamboo yarn • Handmade floral detail</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="blankets">
+                <img src="https://images.unsplash.com/photo-1513264426569-8f9f7d22b270?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Baby Blanket" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <h3>Rainbow Dreams</h3>
+                    <p>Organic cotton • 36" × 36"</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-category="toys">
+                <img src="https://images.unsplash.com/photo-1608649896792-563d7621d95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Crochet Dinosaur" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <h3>Dino Buddy</h3>
+                    <p>Cotton yarn • 10" tall</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop">
+        <h2>Shop</h2>
+        <div class="shop-grid">
+            <div class="product-card">
+                <div class="product-image"><img src="https://images.unsplash.com/photo-1579969564619-35c91b585354?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sunset Blanket" loading="lazy"></div>
+                <div class="product-info">
+                    <h3>Sunset Blanket</h3>
+                    <p class="product-price">KSh 15,500</p>
+                    <button class="btn-shop">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image"><img src="https://images.unsplash.com/photo-1631528622765-1d488bc8a93d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Winter Scarf" loading="lazy"></div>
+                <div class="product-info">
+                    <h3>Winter Warmth Scarf</h3>
+                    <p class="product-price">KSh 5,800</p>
+                    <button class="btn-shop">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image"><img src="https://images.unsplash.com/photo-1559437190-09852264585f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Teddy Bear" loading="lazy"></div>
+                <div class="product-info">
+                    <h3>Cuddle Buddy Bear</h3>
+                    <p class="product-price">KSh 4,500</p>
+                    <button class="btn-shop">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <h2>Blog</h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-image"><img src="https://images.unsplash.com/photo-1606105961732-234297120616?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Crochet Tutorial" loading="lazy"></div>
+                <div class="blog-content">
+                    <p class="blog-date">Jan 1, 2026</p>
+                    <h3>5 Tips for Perfect Crochet Stitches</h3>
+                    <p>Starting your crochet journey? Here are my top tips to help you create beautiful pieces from day one...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-image"><img src="https://images.unsplash.com/photo-1579969564619-35c91b585354?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="DIY Blanket" loading="lazy"></div>
+                <div class="blog-content">
+                    <p class="blog-date">Dec 20, 2025</p>
+                    <h3>Choosing the Right Yarn for Your Project</h3>
+                    <p>Not all yarn is created equal! Learn how to select the perfect yarn for different types of projects...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get in Touch</h2>
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Your Name" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Tell me about your custom order or inquiry..." required></textarea>
+                </div>
+                <button type="submit" class="btn-shop">Send Message</button>
+            </form>
+            <div class="social-links">
+                <a href="https://instagram.com/_kai.vcr" target="_blank" rel="noopener noreferrer">
+                    📸 <span class="social-text">@_kai.vcr</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Handmade Crochet Art. All rights reserved.</p>
+        <p>Made with love in Kenya ❤️</p>
+    </footer>
+
+    <script>
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    
+                    if(filter === 'all' || category === filter){
+                        item.style.display = 'block';
+                        // Small delay to allow display:block to apply before changing opacity
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            // Check if it's still hidden before setting display:none
+                            if(item.style.opacity === '0') {
+                                item.style.display = 'none';
+                            }
+                        }, 400);
+                    }
+                });
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Asante! Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
